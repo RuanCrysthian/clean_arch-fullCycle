@@ -1,14 +1,8 @@
-import ProductInterface from "./product.interface";
+import Product from "./product";
 
-export default class ProductB implements ProductInterface {
-  private _id: string;
-  private _name: string;
-  private _price: number;
-
+export default class ProductB extends Product {
   constructor(id: string, name: string, price: number) {
-    this._id = id;
-    this._name = name;
-    this._price = price;
+    super(id, name, price);
     this.validate();
   }
 

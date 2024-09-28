@@ -1,9 +1,9 @@
 import ProductInterface from "./product.interface";
 
 export default class Product implements ProductInterface {
-  private _id: string;
-  private _name: string;
-  private _price: number;
+  protected _id: string;
+  protected _name: string;
+  protected _price: number;
 
   constructor(id: string, name: string, price: number) {
     this._id = id;
@@ -15,7 +15,7 @@ export default class Product implements ProductInterface {
   get id(): string {
     return this._id;
   }
-  
+
   get name(): string {
     return this._name;
   }
