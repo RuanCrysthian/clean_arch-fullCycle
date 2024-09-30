@@ -4,6 +4,9 @@ export default class ProductB extends Product {
   constructor(id: string, name: string, price: number) {
     super(id, name, price);
     this.validate();
+    if (this.notification.hasErrors()) {
+      throw new Error(this.notification.messages());
+    }
   }
 
   get id(): string {
@@ -28,16 +31,26 @@ export default class ProductB extends Product {
     this.validate();
   }
 
-  validate(): boolean {
-    if (this._id.length === 0) {
-      throw new Error("Id is required");
+  validate() {
+    if (this.id.length === 0) {
+      this.notification.addError({
+        context: "product",
+        message: "Id is required",
+      });
     }
-    if (this._name.length === 0) {
-      throw new Error("Name is required");
+
+    if (this.name.length === 0) {
+      this.notification.addError({
+        context: "product",
+        message: "Name is required",
+      });
     }
-    if (this._price < 0) {
-      throw new Error("Price must be greater than zero");
+
+    if (this.price <= 0) {
+      this.notification.addError({
+        context: "product",
+        message: "Price must be greater than zero",
+      });
     }
-    return true;
   }
 }
