@@ -1,3 +1,4 @@
+import ProductValidatorFactory from "../factory/product.validator.factory";
 import Product from "./product";
 
 export default class ProductB extends Product {
@@ -32,25 +33,6 @@ export default class ProductB extends Product {
   }
 
   validate() {
-    if (this.id.length === 0) {
-      this.notification.addError({
-        context: "product",
-        message: "Id is required",
-      });
-    }
-
-    if (this.name.length === 0) {
-      this.notification.addError({
-        context: "product",
-        message: "Name is required",
-      });
-    }
-
-    if (this.price <= 0) {
-      this.notification.addError({
-        context: "product",
-        message: "Price must be greater than zero",
-      });
-    }
+    ProductValidatorFactory.create().validate(this);
   }
 }
